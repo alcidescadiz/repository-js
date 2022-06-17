@@ -1,0 +1,32 @@
+@api = http://localhost:3000/user
+
+###
+
+GET  {{api}}/api
+###
+
+GET  {{api}}/api/baQ9W9VydRUo4SFYNg61
+
+
+###
+
+POST  {{api}}/api
+content-type: application/json
+
+{
+    "nombre":"margarita",
+    "edad": 50,
+    "email": "margarita@mail.com"
+}
+###
+
+PUT  {{api}}/api/baQ9W9VydRUo4SFYNg61
+content-type: application/json
+
+{
+    "nombre":"Jose Roberto Suarez",
+     "email": "jose-suarez@mail.com"
+}
+###
+
+DELETE  {{api}}/api/5GEKGVV3Fg1OW6QCerlT

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automate</title>
+</head>
+<body>
+    <h1 id="find"></h1>
+    <hr>
+    <h2>Puppeteer</h2>
+    <form  method="get" id="navegar">
+        <input type="text" name="pageUrl" >
+        <input type="text" name="selector" >
+        <input type="text" name="accion"  hidden value="abrir">
+        <button type="submit">Navegar</button>
+    </form>
+    <br>
+    <h2>Scrapping</h2>
+    <form  method="get" id="navegarGoogle">
+        <input type="text" name="pageUrl"  value="https://www.google.com">
+        <input type="text" name="selector" >
+        <input type="text" name="searchWord" >
+        <input type="text" name="accion"  hidden value="google">
+        <button type="submit">Navegar</button>
+    </form>
+
+
+
+
+
+
+
+    <script>
+        let captionPup = async (datos)=>{
+            let res = await fetch('http://localhost:3000/navegar', 
+            {
+                method: "POST",
+                body : JSON.stringify(datos),
+                headers:{'Content-Type': 'application/json'}
+            })
+            let data = await res.json()
+            console.log(data)
+            document.querySelector('#find').innerHTML = data.msg
+        }
+
+        let abrirNavegador = document.querySelector('#navegar')
+        abrirNavegador.addEventListener('submit', (e)=>{
+            e.preventDefault()
+            let pageUrl = e.target[0].value
+            let selector = e.target[1].value
+            let accion = e.target[2].value
+            //console.log(pageUrl)
+            captionPup({pageUrl, selector, accion})
+        })
+
+        let searchGoogle = document.querySelector('#navegarGoogle')
+        searchGoogle.addEventListener('submit', (e)=>{
+            e.preventDefault()
+            let pageUrl = e.target[0].value
+            let selector = e.target[1].value
+            let searchWord = e.target[2].value
+            let accion = e.target[3].value
+            //console.log(pageUrl)
+            captionPup({pageUrl, selector, accion, searchWord})
+        })
+    </script>
+</body>
+</html>

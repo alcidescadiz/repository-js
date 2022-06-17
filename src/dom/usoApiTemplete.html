@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+  </head>
+  <body>
+    <h1>Consumo de Api y uso de Templetes con Js</h1>
+    <div id="modal"></div>
+    <div class="container">
+        <div id="tableItems"></div>
+    </div>
+    <div class="row row-cols-md-4 m-1 " id="items"></div>
+
+    <template id="card">
+        <div class="card m-2 border">
+            <img class="rounded mx-auto" src="..." alt="" width="90%">
+            <div class="card-body ">
+                <h4 class="card-title">Title</h4>
+                <p class="card-text">Text</p>
+            </div>
+        </div>
+    </template>
+    <template id="table">
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Gender</th>
+                        <th>Accion</th>
+                    </tr>
+                </thead>
+                <tbody id="rowAccions">
+                   
+                </tbody>
+            </table>
+        </div>
+    </template>
+    <template id="rowInsert">
+        <tr>
+            <td id="Id"></td>
+            <td id="Name"></td>
+            <td id="Email"></td>
+            <td id="Gender"></td>
+            <td><button 
+                type="button" 
+                class="btn btn-primary" 
+                data-toggle="modal" 
+                data-target="#exampleModal" 
+                data-whatever="@mdo" value="Ver">Ver</button></td>
+        </tr>
+    </template>
+    <template id="modalTemplete">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Data Row</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Id:</label>
+                        <input type="text" class="form-control" id="fId">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Name:</label>
+                        <input type="text" class="form-control" id="fName">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Email:</label>
+                        <input type="text"  class="form-control" id="fEmail">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Gender:</label>
+                        <input type="text"  class="form-control" id="fGender">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Send message</button>
+            </div>
+            </div>
+        </div>
+        </div>
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+    <script src="./usoApiTemplete.js"></script>
+  </body>
+</html>

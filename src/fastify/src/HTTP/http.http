@@ -1,0 +1,28 @@
+@api = http://localhost:3000
+
+###
+
+GET  {{api}}
+###
+
+GET  {{api}}/1
+
+###
+
+POST  {{api}} 
+content-type: application/json
+
+{
+    "name":"alcides"
+}
+###
+
+PUT  {{api}}/1
+content-type: application/json
+
+{
+    "name":"alcides edit"
+}
+###
+
+DELETE  {{api}}/1

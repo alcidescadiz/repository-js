@@ -1,0 +1,9 @@
+@api = http://localhost:3000
+
+###
+post {{api}}/navegar
+Content-Type: application/json
+
+{
+    "pageUrl" : "https://jsonplaceholder.typicode.com/users"
+}
