@@ -1,32 +1,29 @@
-@api = http://localhost:3000/user
+@api = http://localhost:3001/user
 
-###
-
+### todos los usuarios
 GET  {{api}}/api
-###
-
+### usuario por id
 GET  {{api}}/api/baQ9W9VydRUo4SFYNg61
 
-
-###
-
+### todos los usuarios mayores de edad
+GET  {{api}}/api/mayoredad
+### crear un usuario
 POST  {{api}}/api
 content-type: application/json
 
 {
-    "nombre":"margarita",
-    "edad": 50,
-    "email": "margarita@mail.com"
+    "nombre":"ana",
+    "edad": 60,
+    "email": "zena@mail.com"
 }
-###
-
-PUT  {{api}}/api/baQ9W9VydRUo4SFYNg61
+### editar un usuario
+PUT  {{api}}/api/ppjyyyn6VBioh25tq5H3
 content-type: application/json
 
 {
-    "nombre":"Jose Roberto Suarez",
-     "email": "jose-suarez@mail.com"
+    "nombre":"Carlos",
+     "email": "carlos-m@mail.com",
+     "edad" : 45
 }
-###
-
-DELETE  {{api}}/api/5GEKGVV3Fg1OW6QCerlT
+### eliminar un usuario
+DELETE  {{api}}/api/vbeVm5KzBfu32E9h4RUK
