@@ -8,13 +8,22 @@ function isPassword(password){
     return ExpRegularPassword.test(password)
 }
 
+function isEmpty(campo){
+    let dato =  campo !== '' ? true : false
+    return dato
+}
+ function isString(campo){
+    let dato = typeof campo === 'string' ? true : false
+    return dato
+ }
+
 export default function validate(username, nombre, edad, email, password){
 
-    username= typeof username === 'string' && username != '' && username.length >= 4 ? true : false 
-    nombre= typeof nombre === 'string' && nombre != '' && nombre.length >= 8 ? true : false 
-    password= typeof password === 'string' && password != '' && password.length >= 8  && isPassword(password)? true : false 
-    edad = typeof edad === 'number' && edad != ''  ? true : false
-    email = typeof email === 'string' && email != '' && isEmail(email) ? true : false
+    username= isString(username) && isEmpty(username) && username.length >= 4 ? true : false 
+    nombre= isString(nombre) && isEmpty(nombre) && nombre.length >= 8 ? true : false 
+    password= isString(password) && isEmpty(password) && password.length >= 8  && isPassword(password)? true : false 
+    edad = typeof edad === 'number' && isEmpty(edad)  ? true : false
+    email = isString(email) && isEmpty(email) && isEmail(email) ? true : false
 
     if (nombre && edad && email && password && username) {
         return { validation  : true }

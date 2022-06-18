@@ -6,7 +6,6 @@ let nameCollection = "usuarios"
 let Usuarios = Collection(db, nameCollection)
 
 const validarUsuario = async (req, res, next) => {
-
     const {username, password, email } = req.body
     const getUsuario =  (await getDocs(query(Usuarios, where("email", "==", email))))
     const datosUsuario = getUsuario.docs.map((doc) => 
