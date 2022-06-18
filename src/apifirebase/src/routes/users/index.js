@@ -35,6 +35,12 @@ routerUser.get('/api/:id', async (req, res)=>{
 
 routerUser.post('/api', async (req, res)=>{
     const {nombre, edad, email} = req.body
+    const emailUnique =  (await getDocs(query(Usuarios, where("email", "==", email)))).docs
+    if (emailUnique.length > 0) {
+        res.send({msg: "Email ya registrado, ingresar uno valido"})
+        return 
+    }
+
     if(validate(nombre, edad, email).validation){
         const querySnapshot = await  addDoc(Usuarios, {
             nombre: nombre, 

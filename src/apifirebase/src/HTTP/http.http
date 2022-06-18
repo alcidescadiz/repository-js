@@ -14,7 +14,7 @@ content-type: application/json
 {
     "nombre":"ana",
     "edad": 60,
-    "email": "zena@mail.com"
+    "email": "antonio2@mail.com"
 }
 ### editar un usuario
 PUT  {{api}}/api/ppjyyyn6VBioh25tq5H3
