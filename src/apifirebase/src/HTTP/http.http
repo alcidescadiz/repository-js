@@ -2,6 +2,13 @@
 
 ### todos los usuarios
 GET  {{api}}/api
+content-type: application/json
+
+{
+    "password": "Amaria@12345",
+    "email": "maria@mail.com",
+    "username": "mari21"
+}
 ### usuario por id
 GET  {{api}}/api/baQ9W9VydRUo4SFYNg61
 
@@ -12,18 +19,36 @@ POST  {{api}}/api
 content-type: application/json
 
 {
-    "nombre":"ana",
-    "edad": 60,
-    "email": "antonio2@mail.com"
+    "username": "anita",
+    "nombre":"ana maria lopez",
+    "edad": 48,
+    "email": "antonio3@mail.com",
+    "password":"Amaria&123455"
 }
-### editar un usuario
-PUT  {{api}}/api/ppjyyyn6VBioh25tq5H3
+
+### login un usuario
+POST  {{api}}/api/login
 content-type: application/json
 
 {
-    "nombre":"Carlos",
-     "email": "carlos-m@mail.com",
-     "edad" : 45
+    "password": "12345678",
+    "email": "maria@mail.com",
+    "username": "mari21"
+}
+### editar un usuario
+PUT  {{api}}/api/0Br2dqLiIWLeMLdhT54m
+content-type: application/json
+
+{
+    "password": "Amaria@12345",
+    "email": "maria@mail.com",
+    "username": "mari21",
+    
+    "usernameNew": "mari21",
+    "emailNew": "marIa@Mail.com",
+    "edadNew": 15,
+    "nombreNew": "  maria alejandra  ",
+    "passwordNew": "Amaria@12345"
 }
 ### eliminar un usuario
 DELETE  {{api}}/api/vbeVm5KzBfu32E9h4RUK
