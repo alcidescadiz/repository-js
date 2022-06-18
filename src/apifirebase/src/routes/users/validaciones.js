@@ -1,15 +1,9 @@
-import { collection, getDocs, where, query } from "firebase/firestore"
-import db from "../../firebase/index.js"
-let nameCollection = "usuarios"
-let Usuarios = collection(db, nameCollection)
-
 function isEmail(email){
     const ExpRegularEmail = /^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/
     return ExpRegularEmail.test(email)
 }
 
 export default function validate(nombre, edad, email){
-    // !TODO: CAMPO EMAIL QUE SEA ÚNICO 
 
     nombre= typeof nombre === 'string' && nombre != '' && nombre.length >= 4 ? true : false 
     edad = typeof edad === 'number' && edad != ''  ? true : false
