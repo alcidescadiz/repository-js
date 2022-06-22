@@ -19,6 +19,15 @@ function isString(campo) {
   return dato;
 }
 
+export function isImageValdate({originalname , size}){
+  let extFile = originalname.split('.')[1]
+  if(extFile === 'jpg' || extFile === 'jpeg'|| extFile === 'png' || size >= 800000){
+    return { validation: true, msg: 'Tipo de archivo valido' };
+  }else{
+    return { validation: false, msg: 'Tipo de archivo no valido o tamaño muy pesado' };
+  }
+}
+
 export default function validate({username, nombre, edad, email, password}) {
   username =
     isString(username) && isEmpty(username) && username.length >= 4

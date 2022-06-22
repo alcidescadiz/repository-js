@@ -43,13 +43,18 @@ content-type: application/json
 
 ### subir imagen
 POST  {{api}}/api/image
-content-type: application/json
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
-{
-    "username": "pedrito",
-    "email": "pedro@mail.com",
-    "password": "Pedro%&hgsjo5"
-}
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="id"
+
+5oBYonB5zZQm814sJbkd
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="pdf.pdf"
+Content-Type: image/jpeg
+
+< ./pdf.pdf
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
 
 ### login un usuario

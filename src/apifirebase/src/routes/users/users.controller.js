@@ -11,7 +11,7 @@ import {
   getDoc,
 } from "firebase/firestore";
 import { deleteObject,  getDownloadURL, ref, uploadBytes } from 'firebase/storage'
-import validate from "./validaciones.js";
+import validate, {isImageValdate} from "../../utils/validaciones.js";
 import { User } from "../../entities/user.js";
 
 let nameCollection = "usuarios";
@@ -68,8 +68,12 @@ export async function getOneUsers(req, res) {
 
 export async function sendImage(req, res) {
   try {
-    const { buffer} = req.file
+    const { buffer, size, originalname } = req.file
     const { id } = req.body
+    if (!isImageValdate({size,originalname }).validation) {
+      res.status(404).send({msg: isImageValdate({size,originalname }).msg})
+      return
+    }
     const nameImage = 'user-' + Date.now()+'.jpg'
     const mountainsRef =  ref(storage, 'users/'+ nameImage)
     const metadata = {
@@ -83,9 +87,10 @@ export async function sendImage(req, res) {
       { linkImage: nameImage }
     );
     //--- obtener la imagen
-    const imagen = await getDownloadURL(ref(mountainsRef))
-
-    res.send({nameImage, imagen});
+    setTimeout(async ()=>{
+      const imagen = await getDownloadURL(ref(mountainsRef))
+      res.send({nameImage, imagen});
+    }, 3000)
   } catch (error) {
     res.status(404).send({
       error: error.message,
@@ -96,7 +101,7 @@ export async function sendImage(req, res) {
 
 export async function deleteImage(req, res) {
   try {
-    const { nameImage} = req.file
+    const { nameImage} = req.body; //req.params
     //-- eliminar imagen
     const mountainsRef3 =  ref(storage, nameImage);
     const imagenDelete = await deleteObject(mountainsRef3)

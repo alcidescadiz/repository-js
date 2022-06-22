@@ -10,7 +10,7 @@ import {
   loginUser,
   updateUser,
   sendImage
-} from "./controller.js";
+} from "./users.controller.js";
 // middleware de autenticación
 import validarUsuario from "../../auth/index.js";
 import { upload } from "../../utils/multer.js";
