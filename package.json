@@ -9,7 +9,7 @@
     "start": "node src/api/app.js",
     "express-ejes": "nodemon src/express-ejs/index",
     "fastify": "nodemon src/fastify/src/index.js",
-    "firebase": "nodemon src/apifirebase/src/index.js",
+    "firebase": "nodemon src/apifirebase/src/server.js",
     "puppetter": "nodemon src/puppeteer/src/index.js",
     "demo-socket": "nodemon src/websocket/index.js"
   },

@@ -18,7 +18,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 // Router
-import routerUser from "./routes/users/ussers.routes.js";
+import routerUser from "./routes/users/users.routes.js";
 
 app.use("/user", routerUser);
 // para descargar un archivo
@@ -26,8 +26,6 @@ app.use("/user", routerUser);
 app.get("/", (req, res) => {
   res.send(`Ejemplo de ${process.env.Name}`);
 });
-// Puerto
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Escuchando el puerto  ${PORT}`);
-});
+
+export default app
+

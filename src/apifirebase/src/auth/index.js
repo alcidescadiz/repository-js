@@ -18,9 +18,9 @@ const validarUsuario = async (req, res, next) => {
     id: doc.id,
     ...doc.data(),
   }));
-  let existUsername = datosUsuario[0].username === username ? true : false;
-  let existPassword = datosUsuario[0].password === password ? true : false;
-  let existEmail = datosUsuario[0].email === email ? true : false;
+  let existUsername = datosUsuario[0]?.username === username ? true : false;
+  let existPassword = datosUsuario[0]?.password === password ? true : false;
+  let existEmail = datosUsuario[0]?.email === email ? true : false;
 
   if (existUsername && existPassword && existEmail) {
     next();

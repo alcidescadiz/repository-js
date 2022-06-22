@@ -1,16 +1,16 @@
-@api = http://localhost:3001/user
+@api = http://localhost:3002/user
 
 ### todos los usuarios
 GET  {{api}}/api
 content-type: application/json
 
 {
-    "password": "Amaria@12345",
-    "email": "maria@mail.com",
-    "username": "mari21"
+    "username": "pedrito",
+    "email": "pedro@mail.com",
+    "password": "Pedro%&hgsjo5"
 }
 ### usuario por id
-GET  {{api}}/api/4UXl2czBcw39uNsOJBy2
+GET  {{api}}/api/5oBYonB5zZQm814sJbkd
 content-type: application/json
 
 {
@@ -34,11 +34,10 @@ POST  {{api}}/api
 content-type: application/json
 
 {
-    "username": "jo",
-    "nombre":"jose marcano",
-    "edad": 21,
-    "email": "marnoj@mail.com",
-    "password":"Jose1%&hgsjo5"
+    "username": "mario23",
+    "edad": 28,
+    "email": "mario@mail.com",
+    "password":"Mario%&h415jo5"
 }
 
 ### subir imagen
@@ -50,10 +49,10 @@ Content-Disposition: form-data; name="id"
 
 5oBYonB5zZQm814sJbkd
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="file"; filename="pdf.pdf"
+Content-Disposition: form-data; name="file"; filename="prueba.jpeg"
 Content-Type: image/jpeg
 
-< ./pdf.pdf
+< ./prueba.jpeg
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
 
@@ -63,11 +62,11 @@ content-type: application/json
 
 {
     "username": "pedrito",
-    "email": "pedro@mail.com",
+    "email": "pedro@mail.co",
     "password": "Pedro%&hgsjo5"
 }
 ### editar un usuario
-PUT  {{api}}/api/4UXl2czBcw39uNsOJBy2
+PUT  {{api}}/api/0Br2dqLiIWLeMLdhT54m
 content-type: application/json
 
 {
@@ -75,14 +74,14 @@ content-type: application/json
     "email": "marcano-j@mail.com",
     "username": "joseito",
     
-    "usernameNew": "pedrito",
-    "emailNew": "pedro@mail.com",
-    "edadNew": 15,
-    "nombreNew": "PEDRO CASADO",
-    "passwordNew": "Pedro%&hgsjo5"
+    "usernameNew": "mari25",
+    "emailNew": "mariaEdit@mail.com",
+    "edadNew": 16,
+    "nombreNew": "MARIA ALEJANDRA",
+    "passwordNew": "Amaria@12345"
 }
 ### eliminar un usuario
-DELETE  {{api}}/api/uimdUntKPzZDzyuyEuyF
+DELETE  {{api}}/api/BoNjwsCYWBh2Qb9aAbp0
 content-type: application/json
 
 {
