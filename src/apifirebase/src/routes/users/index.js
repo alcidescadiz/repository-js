@@ -1,23 +1,36 @@
-import express from 'express'
-const routerUser = express.Router()
+import express from "express";
+const routerUser = express.Router();
 // Controladores
-import {deleteUser, getALLUsers, getALLUsersMayorEdad, 
-        getOneUsers, createUser, loginUser, updateUser} from'./controller.js'
-// middleware de autenticación 
-import validarUsuario from '../../auth/index.js'
+import {
+  deleteUser,
+  getALLUsers,
+  getALLUsersMayorEdad,
+  getOneUsers,
+  createUser,
+  loginUser,
+  updateUser,
+  sendImage
+} from "./controller.js";
+// middleware de autenticación
+import validarUsuario from "../../auth/index.js";
+import { upload } from "../../utils/multer.js";
+
+
 // Rutas
-routerUser.get('/api',validarUsuario, getALLUsers )
+routerUser.get("/api", validarUsuario, getALLUsers);
 
-routerUser.get('/api/mayoredad', validarUsuario, getALLUsersMayorEdad)
+routerUser.get("/api/mayoredad", validarUsuario, getALLUsersMayorEdad);
 
-routerUser.get('/api/:id',validarUsuario, getOneUsers)
+routerUser.get("/api/:id", validarUsuario, getOneUsers);
 
-routerUser.post('/api', createUser)
+routerUser.post("/api", createUser);
 
-routerUser.post('/api/login', loginUser)
+routerUser.post("/api/login", loginUser);
 
-routerUser.put('/api/:id',validarUsuario, updateUser)
+routerUser.post("/api/image",upload.single('file'), sendImage);
 
-routerUser.delete('/api/:id',validarUsuario, deleteUser)
+routerUser.put("/api/:id", validarUsuario, updateUser);
 
-export default routerUser
+routerUser.delete("/api/:id", validarUsuario, deleteUser);
+
+export default routerUser;

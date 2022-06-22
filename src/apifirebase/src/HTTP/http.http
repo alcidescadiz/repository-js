@@ -10,7 +10,7 @@ content-type: application/json
     "username": "mari21"
 }
 ### usuario por id
-GET  {{api}}/api/baQ9W9VydRUo4SFYNg61
+GET  {{api}}/api/4UXl2czBcw39uNsOJBy2
 content-type: application/json
 
 {
@@ -34,12 +34,23 @@ POST  {{api}}/api
 content-type: application/json
 
 {
-    "username": 45,
-    "nombre":"pedro casado",
-    "edad": 25,
-    "email": "pedro2@mail.com",
-    "password":"Pedro%&hgsjo5"
+    "username": "jo",
+    "nombre":"jose marcano",
+    "edad": 21,
+    "email": "marnoj@mail.com",
+    "password":"Jose1%&hgsjo5"
 }
+
+### subir imagen
+POST  {{api}}/api/image
+content-type: application/json
+
+{
+    "username": "pedrito",
+    "email": "pedro@mail.com",
+    "password": "Pedro%&hgsjo5"
+}
+
 
 ### login un usuario
 POST  {{api}}/api/login
@@ -51,19 +62,19 @@ content-type: application/json
     "password": "Pedro%&hgsjo5"
 }
 ### editar un usuario
-PUT  {{api}}/api/0Br2dqLiIWLeMLdhT54m
+PUT  {{api}}/api/4UXl2czBcw39uNsOJBy2
 content-type: application/json
 
 {
-    "password": "Amaria@12345",
-    "email": "maria@mail.com",
-    "username": "mari21",
+    "password": "Jose1%&hgsjo5",
+    "email": "marcano-j@mail.com",
+    "username": "joseito",
     
-    "usernameNew": 45,
-    "emailNew": 45,
-    "edadNew": "15",
-    "nombreNew": 45,
-    "passwordNew": "A2345"
+    "usernameNew": "pedrito",
+    "emailNew": "pedro@mail.com",
+    "edadNew": 15,
+    "nombreNew": "PEDRO CASADO",
+    "passwordNew": "Pedro%&hgsjo5"
 }
 ### eliminar un usuario
 DELETE  {{api}}/api/uimdUntKPzZDzyuyEuyF
