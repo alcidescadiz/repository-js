@@ -1,10 +1,3 @@
-import { storage } from "../../firebase/index.js";
-import {
-  deleteObject,
-  getDownloadURL,
-  ref,
-  uploadBytes,
-} from "firebase/storage";
 import validate, { isImageValdate } from "../../utils/validaciones.js";
 import { User } from "../../entities/user.js";
 import {
@@ -16,10 +9,12 @@ import {
   getWhereDatabase,
   isEmailUnique,
   updateDocDatabase,
+  updateOnePropietyDocDatabase,
 } from "../../firebase/factory.database.js";
 import { collectionsName } from "../../firebase/collections.js";
+import { deleteFile, saveFile } from "../../firebase/factory.storage.js";
 
-let nameCollection = collectionsName.users
+let nameCollection = collectionsName.users;
 
 export async function getALLUsers(req, res) {
   res.send(await getAllDatabase(nameCollection));
@@ -36,28 +31,32 @@ export async function getOneUsers(req, res) {
 
 export async function sendImage(req, res) {
   try {
+    console.log(req.body)
     const { buffer, size, originalname } = req.file;
-    const { id } = req.body;
-    if (!isImageValdate({ size, originalname }).validation) {
-      res.status(404).send({ msg: isImageValdate({ size, originalname }).msg });
-      return;
+    const { id, email, username, password } = req.body;
+    let datosUsuario = await getOneDatabase(id, nameCollection)
+    console.log(datosUsuario)
+
+    let existUsername = datosUsuario.username === username ? true : false;
+    let existPassword = datosUsuario.password === password ? true : false;
+    let existEmail = datosUsuario.email === email ? true : false;
+  
+    if (existUsername && existPassword && existEmail) {
+      if (!isImageValdate({ size, originalname }).validation) {
+        res.status(404).send({ msg: isImageValdate({ size, originalname }).msg });
+        return;
+      }
+      // Subir una imagen a Storage:
+      let datos = await saveFile(originalname, nameCollection, buffer);
+      // actualizar datos
+      await updateOnePropietyDocDatabase(id, nameCollection, {
+        linkImage: datos.linkImage,
+      });
+      res.send({ linkImage: datos.linkImage });
+    } else {
+      return res.send({ mensaje: "Error no tienes autorización" });
     }
-    const nameImage = "user-" + Date.now() + ".jpg";
-    const mountainsRef = ref(storage, "users/" + nameImage);
-    const metadata = {
-      contentType: "image/jpg",
-    };
-    // Subir una imagen a Storage:
-    uploadBytes(mountainsRef, buffer, metadata);
-    // actualizar datos
-    await updateDocDatabase(id, nameCollection, User, {
-      linkImage: nameImage,
-    });
-    //--- obtener la imagen
-    setTimeout(async () => {
-      const imagen = await getDownloadURL(ref(mountainsRef));
-      res.send({ nameImage, imagen });
-    }, 3000);
+
   } catch (error) {
     res.status(404).send({
       error: error.message,
@@ -68,11 +67,9 @@ export async function sendImage(req, res) {
 
 export async function deleteImage(req, res) {
   try {
-    const { nameImage } = req.body; //req.params
+    const { linkImage } = req.body; //req.params
     //-- eliminar imagen
-    const mountainsRef3 = ref(storage, nameImage);
-    const imagenDelete = await deleteObject(mountainsRef3);
-    res.send({ msg: "Imagen eliminada" });
+    res.send(await deleteFile(nameCollection, linkImage));
   } catch (error) {
     res.status(404).send({
       error: error.message,
@@ -115,6 +112,7 @@ export async function loginUser(req, res) {
     });
   }
 }
+
 export async function updateUser(req, res) {
   try {
     const { id } = req.params;

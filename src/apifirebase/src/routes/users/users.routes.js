@@ -9,12 +9,12 @@ import {
   createUser,
   loginUser,
   updateUser,
-  sendImage
+  sendImage,
+  deleteImage
 } from "./users.controller.js";
 // middleware de autenticación
 import validarUsuario from "../../auth/index.js";
 import { upload } from "../../utils/multer.js";
-
 
 // Rutas
 routerUser.get("/api", validarUsuario, getALLUsers);
@@ -27,9 +27,11 @@ routerUser.post("/api", createUser);
 
 routerUser.post("/api/login", loginUser);
 
-routerUser.post("/api/image",upload.single('file'), sendImage);
+routerUser.post("/api/image", upload.single('file'), sendImage);
 
 routerUser.put("/api/:id", validarUsuario, updateUser);
+
+routerUser.delete("/api/image", validarUsuario, deleteImage);
 
 routerUser.delete("/api/:id", validarUsuario, deleteUser);
 

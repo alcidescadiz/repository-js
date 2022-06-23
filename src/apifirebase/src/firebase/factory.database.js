@@ -116,6 +116,22 @@ export async function updateDocDatabase(id,nameCollection, Entity, ObjEntity ) {
   }
 }
 
+export async function updateOnePropietyDocDatabase(id,nameCollection, PropietyObj ) {
+  try {
+      await updateDoc(
+        doc(db, nameCollection, id),
+        PropietyObj
+      );
+      return{ message: `Documento: ${id} editado` }
+ 
+  } catch (error) {
+    return {
+      error: error.message,
+      msg: "Algo mal ha pasado revise los datos enviados",
+    }
+  }
+}
+
 export async function doLogin(nameCollection, username, password, email) {
   try {
     const getUsuario = await getDocs(

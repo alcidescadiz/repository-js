@@ -10,6 +10,7 @@ let nameCollection = "usuarios";
 let Usuarios = Collection(db, nameCollection);
 
 const validarUsuario = async (req, res, next) => {
+  try {
   const { username, password, email } = req.body;
   const getUsuario = await getDocs(
     query(Usuarios, where("email", "==", email))
@@ -27,5 +28,9 @@ const validarUsuario = async (req, res, next) => {
   } else {
     return res.send({ mensaje: "Error no tienes autorización" });
   }
-};
+
+  } catch (error) {
+    return res.send({ mensaje: error.message });
+  }
+  };
 export default validarUsuario;

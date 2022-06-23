@@ -20,7 +20,7 @@ function isString(campo) {
 }
 
 export function isImageValdate({originalname , size}){
-  let extFile = originalname.split('.')[1]
+  let extFile = originalname.split('.')[1] 
   if(extFile === 'jpg' || extFile === 'jpeg'|| extFile === 'png' || size >= 800000){
     return { validation: true, msg: 'Tipo de archivo valido' };
   }else{

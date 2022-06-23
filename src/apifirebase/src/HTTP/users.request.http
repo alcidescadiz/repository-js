@@ -47,14 +47,36 @@ Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0g
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="id"
 
-5oBYonB5zZQm814sJbkd
+DOZx5x0J1zLwtuMLRAc
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="username"
+
+angelita
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="password"
+
+Delgo%&hgsjo5
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="email"
+
+angela-delg@mail.com
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="file"; filename="prueba.jpeg"
 Content-Type: image/jpeg
 
 < ./prueba.jpeg
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
+### eliminar una imagen
+DELETE  {{api}}/api/image
+content-type: application/json
 
+{
+    "username": "pedrito",
+    "email": "pedro@mail.com",
+    "password": "Pedro%&hgsjo5",
+    "linkImage" : "usuarios1655992149492.jpeg"
+
+}
 
 ### login un usuario
 POST  {{api}}/api/login
