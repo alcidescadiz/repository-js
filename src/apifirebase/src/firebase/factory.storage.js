@@ -1,5 +1,5 @@
 import {  deleteObject, ref, uploadBytes } from "firebase/storage";
-import { storage } from "./index.js";
+import { storage } from "./config.js";
 
 export async function saveFile(originalname, nameCollection, buffer) {
   try {

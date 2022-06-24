@@ -25,9 +25,9 @@ GET  {{api}}/api/mayoredad
 content-type: application/json
 
 {
-    "password": "Amaria@12345",
-    "email": "maria@mail.com",
-    "username": "mari21"
+    "password": "Amaria&123455",
+    "email": "antonio3@mail.com",
+    "username": "anita"
 }
 ### crear un usuario
 POST  {{api}}/api
@@ -35,6 +35,7 @@ content-type: application/json
 
 {
     "username": "mario23",
+    "nombre": "ana maria lopez",
     "edad": 28,
     "email": "mario@mail.com",
     "password":"Mario%&h415jo5"
@@ -84,7 +85,7 @@ content-type: application/json
 
 {
     "username": "pedrito",
-    "email": "pedro@mail.co",
+    "email": "pedro@mail.com",
     "password": "Pedro%&hgsjo5"
 }
 ### editar un usuario

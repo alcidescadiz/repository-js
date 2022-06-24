@@ -9,7 +9,7 @@ import {
   updateDoc,
   getDoc,
 } from "firebase/firestore";
-import db from "./index.js";
+import db from "./config.js";
 
 export async function getAllDatabase(nameCollection) {
   try {

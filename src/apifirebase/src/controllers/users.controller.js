@@ -1,5 +1,5 @@
-import validate, { isImageValdate } from "../../utils/validaciones.js";
-import { User } from "../../entities/user.js";
+import validate, { isImageValdate } from "../utils/validaciones.js";
+import { User } from "../models/user.js";
 import {
   createDocDatabase,
   deleteDocumentDatabase,
@@ -10,9 +10,9 @@ import {
   isEmailUnique,
   updateDocDatabase,
   updateOnePropietyDocDatabase,
-} from "../../firebase/factory.database.js";
-import { collectionsName } from "../../firebase/collections.js";
-import { deleteFile, saveFile } from "../../firebase/factory.storage.js";
+} from "../firebase/factory.database.js";
+import { collectionsName } from "../firebase/collections.js";
+import { deleteFile, saveFile } from "../firebase/factory.storage.js";
 
 let nameCollection = collectionsName.users;
 
@@ -31,19 +31,21 @@ export async function getOneUsers(req, res) {
 
 export async function sendImage(req, res) {
   try {
-    console.log(req.body)
+    console.log(req.body);
     const { buffer, size, originalname } = req.file;
     const { id, email, username, password } = req.body;
-    let datosUsuario = await getOneDatabase(id, nameCollection)
-    console.log(datosUsuario)
+    let datosUsuario = await getOneDatabase(id, nameCollection);
+    console.log(datosUsuario);
 
     let existUsername = datosUsuario.username === username ? true : false;
     let existPassword = datosUsuario.password === password ? true : false;
     let existEmail = datosUsuario.email === email ? true : false;
-  
+
     if (existUsername && existPassword && existEmail) {
       if (!isImageValdate({ size, originalname }).validation) {
-        res.status(404).send({ msg: isImageValdate({ size, originalname }).msg });
+        res
+          .status(404)
+          .send({ msg: isImageValdate({ size, originalname }).msg });
         return;
       }
       // Subir una imagen a Storage:
@@ -56,7 +58,6 @@ export async function sendImage(req, res) {
     } else {
       return res.send({ mensaje: "Error no tienes autorización" });
     }
-
   } catch (error) {
     res.status(404).send({
       error: error.message,
@@ -80,14 +81,13 @@ export async function deleteImage(req, res) {
 
 export async function createUser(req, res) {
   try {
-    const { email } = req.body;
-    if ((await isEmailUnique(email, nameCollection)) > 0) {
-      res.send({ msg: "Email ya registrado, ingresar uno valido" });
-      return;
-    }
     let validar = validate({ ...req.body });
-
     if (validar.validation) {
+      const { email } = req.body;
+      if ((await isEmailUnique(email, nameCollection)) > 0) {
+        res.send({ msg: "Email ya registrado, ingresar uno valido" });
+        return;
+      }
       await createDocDatabase(nameCollection, User, req.body);
       res.send({ ...User({ ...req.body }), msg: "Usuario agregado con éxito" });
     } else {

@@ -1,5 +1,5 @@
 // firebase
-import db from "../firebase/index.js";
+import db from "../firebase/config.js";
 import {
   collection as Collection,
   getDocs,

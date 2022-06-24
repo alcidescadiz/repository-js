@@ -18,7 +18,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 // Router
-import routerUser from "./routes/users/users.routes.js";
+import routerUser from "./routes/users.routes.js";
 
 app.use("/user", routerUser);
 // para descargar un archivo

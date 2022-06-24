@@ -11,10 +11,10 @@ import {
   updateUser,
   sendImage,
   deleteImage
-} from "./users.controller.js";
+} from "../controllers/users.controller.js";
 // middleware de autenticación
-import validarUsuario from "../../auth/index.js";
-import { upload } from "../../utils/multer.js";
+import validarUsuario from "../middlewares/auth.js";
+import { upload } from "../services/multer.js";
 
 // Rutas
 routerUser.get("/api", validarUsuario, getALLUsers);
