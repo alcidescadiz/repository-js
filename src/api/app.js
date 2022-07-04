@@ -33,6 +33,7 @@ app.get('/', (req, res) => {
  */
 app.post("./v1", (req, res, next) => {})
 
+console.log(process.argv)
 
 
 app.listen(port, () => {

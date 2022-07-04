@@ -79,7 +79,7 @@ export async function deleteDocumentDatabase(id, nameCollection) {
 
 export async function createDocDatabase(nameCollection,Entity, ObjEntity) {
     try {
-        let dato = await addDoc(Collection(db, nameCollection), Entity(ObjEntity));
+        let dato = await addDoc(Collection(db, nameCollection), Entity(ObjEntity, 'create'));
         res.send({ ...Entity(ObjEntity), msg: "Usuario agregado con éxito" });
     } catch (error) {
       return {
@@ -104,7 +104,7 @@ export async function updateDocDatabase(id,nameCollection, Entity, ObjEntity ) {
   try {
       await updateDoc(
         doc(db, nameCollection, id),
-        Entity({...ObjEntity})
+        Entity({...ObjEntity}, 'update')
       );
       return{ message: `Documento: ${id} editado` }
  

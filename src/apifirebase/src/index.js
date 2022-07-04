@@ -20,7 +20,7 @@ app.set("views", path.join(__dirname, "views"));
 // Router
 import routerUser from "./routes/users.routes.js";
 
-app.use("/user", routerUser);
+app.use("/v1/user", routerUser);
 // para descargar un archivo
 
 app.get("/", (req, res) => {

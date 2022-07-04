@@ -1,4 +1,4 @@
-import validate, { isImageValdate } from "../utils/validaciones.js";
+import { isImageValdate } from "../utils/validaciones.js";
 import { User } from "../models/user.js";
 import {
   createDocDatabase,
@@ -17,25 +17,23 @@ import { deleteFile, saveFile } from "../firebase/factory.storage.js";
 let nameCollection = collectionsName.users;
 
 export async function getALLUsers(req, res) {
-  res.send(await getAllDatabase(nameCollection));
+  res.status(200).send(await getAllDatabase(nameCollection));
 }
 
 export async function getALLUsersMayorEdad(req, res) {
-  res.send(await getWhereDatabase(nameCollection, "edad", ">", 18));
+  res.status(200).send(await getWhereDatabase(nameCollection, "edad", ">", 18));
 }
 
 export async function getOneUsers(req, res) {
   const { id } = req.params;
-  res.send(await getOneDatabase(id, nameCollection));
+  res.status(200).send(await getOneDatabase(id, nameCollection));
 }
 
 export async function sendImage(req, res) {
   try {
-    console.log(req.body);
     const { buffer, size, originalname } = req.file;
     const { id, email, username, password } = req.body;
     let datosUsuario = await getOneDatabase(id, nameCollection);
-    console.log(datosUsuario);
 
     let existUsername = datosUsuario.username === username ? true : false;
     let existPassword = datosUsuario.password === password ? true : false;
@@ -54,9 +52,9 @@ export async function sendImage(req, res) {
       await updateOnePropietyDocDatabase(id, nameCollection, {
         linkImage: datos.linkImage,
       });
-      res.send({ linkImage: datos.linkImage });
+      res.status(200).send({ linkImage: datos.linkImage });
     } else {
-      return res.send({ mensaje: "Error no tienes autorización" });
+      return res.status(404).send({ mensaje: "Error no tienes autorización" });
     }
   } catch (error) {
     res.status(404).send({
@@ -70,7 +68,7 @@ export async function deleteImage(req, res) {
   try {
     const { linkImage } = req.body; //req.params
     //-- eliminar imagen
-    res.send(await deleteFile(nameCollection, linkImage));
+    res.status(204).send(await deleteFile(nameCollection, linkImage));
   } catch (error) {
     res.status(404).send({
       error: error.message,
@@ -81,20 +79,20 @@ export async function deleteImage(req, res) {
 
 export async function createUser(req, res) {
   try {
-    let validar = validate({ ...req.body });
-    if (validar.validation) {
-      const { email } = req.body;
-      if ((await isEmailUnique(email, nameCollection)) > 0) {
-        res.send({ msg: "Email ya registrado, ingresar uno valido" });
-        return;
-      }
-      await createDocDatabase(nameCollection, User, req.body);
-      res.send({ ...User({ ...req.body }), msg: "Usuario agregado con éxito" });
-    } else {
-      res.send(validar.msg);
+    const { email } = req.body;
+    if ((await isEmailUnique(email, nameCollection)) > 0) {
+      res.status(400).send({ msg: "Email ya registrado, ingresar uno valido" });
+      return;
     }
+    await createDocDatabase(nameCollection, User, req.body);
+    res
+      .status(200)
+      .send({
+        ...User({ ...req.body }, "create"),
+        msg: "Usuario agregado con éxito",
+      });
   } catch (error) {
-    res.send({
+    res.status(400).send({
       error: error.message,
       msg: "Algo mal ha pasado revise los datos enviados",
     });
@@ -104,9 +102,11 @@ export async function createUser(req, res) {
 export async function loginUser(req, res) {
   try {
     const { username, password, email } = req.body;
-    res.send(await doLogin(nameCollection, username, password, email));
+    res
+      .status(200)
+      .send(await doLogin(nameCollection, username, password, email));
   } catch (error) {
-    res.send({
+    res.status(400).send({
       error: error.message,
       msg: "Algo mal ha pasado revise los datos enviados",
     });
@@ -123,22 +123,17 @@ export async function updateUser(req, res) {
       edadNew: edad,
       passwordNew: password,
     } = req.body;
-    const validar = validate({ username, nombre, edad, email, password });
-    if (validar.validation) {
-      res.send(
-        await updateDocDatabase(id, nameCollection, User, {
-          username,
-          nombre,
-          email,
-          edad,
-          password,
-        })
-      );
-    } else {
-      res.send(validar.msg);
-    }
+    res.status(200).send(
+      await updateDocDatabase(id, nameCollection, User, {
+        username,
+        nombre,
+        email,
+        edad,
+        password,
+      })
+    );
   } catch (error) {
-    res.send({
+    res.status(400).send({
       error: error.message,
       msg: "Algo mal ha pasado revise los datos enviados",
     });
@@ -147,5 +142,5 @@ export async function updateUser(req, res) {
 
 export async function deleteUser(req, res) {
   const { id } = req.params;
-  res.send(await deleteDocumentDatabase(id, nameCollection));
+  res.status(204).send(await deleteDocumentDatabase(id, nameCollection));
 }

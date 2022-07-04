@@ -1,4 +1,4 @@
-@api = http://localhost:3002/user
+@api = http://localhost:3002/v1/user
 
 ### todos los usuarios
 GET  {{api}}/api
@@ -10,7 +10,7 @@ content-type: application/json
     "password": "Pedro%&hgsjo5"
 }
 ### usuario por id
-GET  {{api}}/api/5oBYonB5zZQm814sJbkd
+GET  {{api}}/api/5oBYonB5zZQm814sJbkd 
 content-type: application/json
 
 {
@@ -34,11 +34,11 @@ POST  {{api}}/api
 content-type: application/json
 
 {
-    "username": "mario23",
-    "nombre": "ana maria lopez",
-    "edad": 28,
-    "email": "mario@mail.com",
-    "password":"Mario%&h415jo5"
+    "username": "gu",
+    "nombre": "gustavo rodriguez",
+    "edad": "85",
+    "email": "gustavomail.com",
+    "password":"Gustjo5"
 }
 
 ### subir imagen
@@ -48,7 +48,7 @@ Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0g
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="id"
 
-DOZx5x0J1zLwtuMLRAc
+5oBYonB5zZQm814sJbkd
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="username"
 
@@ -84,24 +84,25 @@ POST  {{api}}/api/login
 content-type: application/json
 
 {
-    "username": "pedrito",
-    "email": "pedro@mail.com",
-    "password": "Pedro%&hgsjo5"
+    "username": "angel21",
+    "email": "angel@mail.com",
+    "password": "Amaria@12345"
 }
 ### editar un usuario
-PUT  {{api}}/api/0Br2dqLiIWLeMLdhT54m
+PUT  {{api}}/api/5oBYonB5zZQm814sJbkd
 content-type: application/json
 
 {
-    "password": "Jose1%&hgsjo5",
-    "email": "marcano-j@mail.com",
-    "username": "joseito",
+    "username": "pedrito",
+    "email": "pedro@mail.com",
+    "password": "Pedro%&hgsjo5",
     
-    "usernameNew": "mari25",
-    "emailNew": "mariaEdit@mail.com",
-    "edadNew": 16,
-    "nombreNew": "MARIA ALEJANDRA",
-    "passwordNew": "Amaria@12345"
+    "usernameNew": "ang",
+    "emailNew": "angelmailcom",
+    "edadNew": "25",
+    "linkImage": "",
+    "nombreNew": "angel bastardo",
+    "passwordNew": "Ama45"
 }
 ### eliminar un usuario
 DELETE  {{api}}/api/BoNjwsCYWBh2Qb9aAbp0

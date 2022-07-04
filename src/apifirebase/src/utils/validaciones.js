@@ -79,3 +79,42 @@ export default function validate({username, nombre, edad, email, password}) {
     return { validation: false, msg };
   }
 }
+
+export function validateLogin({username, email, password}) {
+  username =
+    isString(username) && isEmpty(username) && username.length >= 4
+      ? true
+      : false;
+  password =
+    isString(password) &&
+    isEmpty(password) &&
+    password.length >= 8 &&
+    isPassword(password)
+      ? true
+      : false;
+  email = isString(email) && isEmpty(email) && isEmail(email) ? true : false;
+
+  if ( email && password && username) {
+    return { validation: true };
+  } else {
+    let msgValidado = "Campo con validación correcta";
+    let msg = [];
+    let msgUsername = {
+      username: username
+        ? msgValidado
+        : "Campo tipo String requerido, mínimo 4 letras",
+    };
+    let msgEmail = {
+      email: email ? msgValidado : "Campo tipo String requerido",
+    };
+    let msgPassword = {
+      password: password
+        ? msgValidado
+        : "Campo tipo String requerido mínimo 8 caracteres, máximo 15 caracteres al menos una letra mayúscula, al menos un número, al menos un carácter especial [$, @, ?, %, &, !] ",
+    };
+    !username ? msg.push(msgUsername) : null;
+    !email ? msg.push(msgEmail) : null;
+    !password ? msg.push(msgPassword) : null;
+    return { validation: false, msg };
+  }
+}
