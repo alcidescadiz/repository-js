@@ -77,10 +77,10 @@ export async function deleteDocumentDatabase(id, nameCollection) {
   }
 }
 
-export async function createDocDatabase(nameCollection,Entity, ObjEntity) {
+export async function createDocDatabase(nameCollection, ObjEntity) {
     try {
-        let dato = await addDoc(Collection(db, nameCollection), Entity(ObjEntity, 'create'));
-        res.send({ ...Entity(ObjEntity), msg: "Usuario agregado con éxito" });
+        let dato = await addDoc(Collection(db, nameCollection), ObjEntity);
+        res.send({ ...ObjEntity, msg: "Usuario agregado con éxito" });
     } catch (error) {
       return {
         error: error.message,
@@ -100,14 +100,13 @@ export async function isEmailUnique(email, nameCollection) {
   }
 }
 
-export async function updateDocDatabase(id,nameCollection, Entity, ObjEntity ) {
+export async function updateDocDatabase(id,nameCollection, ObjEntity ) {
   try {
       await updateDoc(
         doc(db, nameCollection, id),
-        Entity({...ObjEntity}, 'update')
+        {...ObjEntity}
       );
       return{ message: `Documento: ${id} editado` }
- 
   } catch (error) {
     return {
       error: error.message,

@@ -21,19 +21,6 @@ export let Navegar = async (pageUrl, searchWord) => {
             document.getElementsByClassName("Wt5Tfe")[index].innerText,
         };
 
-        if (
-          document.getElementsByClassName("iUh30 qLRx3b tjvcx")[index]
-        ) {
-          objetoBusqueda.link =
-            document.getElementsByClassName("iUh30 qLRx3b tjvcx")[
-              index
-            ].innerText;
-        }
-
-        if (document.getElementsByClassName("iUh30 tjvcx")[index]) {
-          objetoBusqueda.link =
-            document.getElementsByClassName("iUh30 tjvcx")[index].innerText;
-        }
 
         datos.push(objetoBusqueda);
       }
@@ -48,4 +35,4 @@ export let Navegar = async (pageUrl, searchWord) => {
   }
 };
 
-Navegar("https://www.google.com/", "javascript");
+Navegar("https://www.google.com/", "js docs node");

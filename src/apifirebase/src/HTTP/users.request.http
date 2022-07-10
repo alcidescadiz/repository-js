@@ -34,11 +34,11 @@ POST  {{api}}/api
 content-type: application/json
 
 {
-    "username": "gu",
-    "nombre": "gustavo rodriguez",
-    "edad": "85",
-    "email": "gustavomail.com",
-    "password":"Gustjo5"
+    "username": "antoni",
+    "nombre": "antonio montechiaro",
+    "edad": 18,
+    "email": "antonio@mail.com",
+    "password":"anton45MAR@%&"
 }
 
 ### subir imagen
@@ -89,7 +89,7 @@ content-type: application/json
     "password": "Amaria@12345"
 }
 ### editar un usuario
-PUT  {{api}}/api/5oBYonB5zZQm814sJbkd
+PUT  {{api}}/api/7EC3Pr4AmSHhCNEXQvs7
 content-type: application/json
 
 {
@@ -97,12 +97,12 @@ content-type: application/json
     "email": "pedro@mail.com",
     "password": "Pedro%&hgsjo5",
     
-    "usernameNew": "ang",
-    "emailNew": "angelmailcom",
-    "edadNew": "25",
+    "usernameNew": "joseito4",
+    "emailNew": "marcano-j@mail.com",
+    "edadNew": 26,
     "linkImage": "",
-    "nombreNew": "angel bastardo",
-    "passwordNew": "Ama45"
+    "nombreNew": "JOSE ALEJANDRO MARCANO lopez",
+    "passwordNew": "Jose1%&hgsjo5"
 }
 ### eliminar un usuario
 DELETE  {{api}}/api/BoNjwsCYWBh2Qb9aAbp0

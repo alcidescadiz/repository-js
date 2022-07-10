@@ -6,13 +6,22 @@
 
 import express from "express"
 let app = express()
-
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
  /**
   * A float number
   * @type {number}
   */
 const port = 3000
+
+
+function middleware (req, res, next){
+  req.string = 'prueba string'
+  req.objeto = {msg : 'prueba objeto'}
+  next()
+}
+
 
 /**
  * Api Get
@@ -22,16 +31,12 @@ const port = 3000
  * @response {String} "Hello.World!" Respuesta de la ruta
  * @example http://127.0.0.1:3000/
  */
-app.get('/', (req, res) => {
-  res.send('Hello World!')
+app.get('/',middleware,  (req, res) => {
+  //console.log({uno : req.string, dos: req.objeto})
+  res.send({uno : req.string, dos: req.objeto})
 })
 
-/**
- * Upload a file.
- * @name File Upload
- * @path {POST} /v1
- */
-app.post("./v1", (req, res, next) => {})
+
 
 console.log(process.argv)
 

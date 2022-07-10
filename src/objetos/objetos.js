@@ -72,3 +72,14 @@ console.log(Object.values(objeto))
     ability: "Ultra sleep",
     isActive: true
 }
+/// array de objetos unicos
+let data = [
+    { nombre: "alcides", edad: 21 },
+    { nombre: "juan", edad: 21 },
+    { nombre: "alcides", edad: 21 },
+    { nombre: "juan", edad: 21 },
+  ];
+  
+  let  hash = {};
+  let array = data.filter(o => hash[o.nombre] ? false : hash[o.nombre] = true);
+  console.log(array); 

@@ -1,40 +1,44 @@
-export function User({
+export function UserEsquema(  
   username,
   nombre,
-  email,
   edad,
+  email,
   password,
-  linkImage = ""
-}, type) {
-  if (type === 'create'){
-    return {
-      username: username.trim(),
-      nombre: nombre.trim().toUpperCase(),
-      email: email.trim().toLowerCase(),
-      edad: edad,
-      password: password.trim(),
-      activo: true,
-      linkImage: linkImage,
-      create_at: new Intl.DateTimeFormat("es", {
-        dateStyle: "full",
-        timeStyle: "short",
-      }).format(new Date()),
-      updated_at: ''
+  linkImage = "") {
+  return [
+    {
+      username :{
+        value: username.trim(),
+        type: "string",
+        empty: false,
+        min: 4
+      },
+      nombre: {
+        value: nombre.trim().toUpperCase(),
+        type: "string",
+        empty: false
+      },
+      edad: {
+        value: edad,
+        type: "number",
+        empty: false,
+        max: 110,
+        min: 16
+      },
+      email: {
+        value: email.trim().toLowerCase(),
+        type: "email",
+        empty: false,
+      },
+      password: {
+        value: password.trim(),
+        type: "password"
+      },
+      linkImage: {
+        value: linkImage,
+        type: 'string'
+      }
+      
     }
-  }
-  if (type === 'update'){
-      return {
-        username: username.trim(),
-        nombre: nombre.trim().toUpperCase(),
-        email: email.trim().toLowerCase(),
-        edad: edad,
-        password: password.trim(),
-        activo: true,
-        linkImage: linkImage,
-        updated_at: new Intl.DateTimeFormat("es", {
-          dateStyle: "full",
-          timeStyle: "short",
-        }).format(new Date())
-      };
-  }
+  ];
 }

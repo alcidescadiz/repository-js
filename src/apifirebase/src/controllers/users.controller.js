@@ -1,5 +1,4 @@
 import { isImageValdate } from "../utils/validaciones.js";
-import { User } from "../models/user.js";
 import {
   createDocDatabase,
   deleteDocumentDatabase,
@@ -84,11 +83,10 @@ export async function createUser(req, res) {
       res.status(400).send({ msg: "Email ya registrado, ingresar uno valido" });
       return;
     }
-    await createDocDatabase(nameCollection, User, req.body);
+    await createDocDatabase(nameCollection, req.user);
     res
       .status(200)
-      .send({
-        ...User({ ...req.body }, "create"),
+      .send({...req.user,
         msg: "Usuario agregado con éxito",
       });
   } catch (error) {
@@ -116,21 +114,8 @@ export async function loginUser(req, res) {
 export async function updateUser(req, res) {
   try {
     const { id } = req.params;
-    const {
-      usernameNew: username,
-      nombreNew: nombre,
-      emailNew: email,
-      edadNew: edad,
-      passwordNew: password,
-    } = req.body;
     res.status(200).send(
-      await updateDocDatabase(id, nameCollection, User, {
-        username,
-        nombre,
-        email,
-        edad,
-        password,
-      })
+      await updateDocDatabase(id, nameCollection, req.user)
     );
   } catch (error) {
     res.status(400).send({

@@ -12,7 +12,7 @@
     "firebase": "nodemon src/apifirebase/src/server.js",
     "puppetter": "nodemon src/puppeteer/src/index.js",
     "demo-socket": "nodemon src/websocket/index.js",
-    "jsontocsv":"node src/jsontocsv/index"
+    "jsontocsv": "node src/jsontocsv/index"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +29,7 @@
     "json2csv": "5.0.7",
     "multer": "1.4.5-lts.1",
     "puppeteer": "14.4.1",
-    "socket.io": "4.5.1"
+    "socket.io": "4.5.1",
+    "validaresquema": "^0.1.0"
   }
 }
