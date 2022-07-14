@@ -6,33 +6,40 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import { validateLogin } from "../utils/validaciones.js";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
+const KEY = process.env.KEY;
 let nameCollection = "usuarios";
 let Usuarios = Collection(db, nameCollection);
 
 const validarUsuario = async (req, res, next) => {
   try {
-    const { username, password, email } = req.body;
-    let validar = validateLogin({ username, password, email });
-    if (validar.validation) {
-      const getUsuario = await getDocs(
-        query(Usuarios, where("email", "==", email))
-      );
-      const datosUsuario = getUsuario.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      let existUsername = datosUsuario[0]?.username === username ? true : false;
-      let existPassword = datosUsuario[0]?.password === password ? true : false;
-      let existEmail = datosUsuario[0]?.email === email ? true : false;
+    const token = req.headers["x-access-token"];
+    if (!token) {
+      return res.status(403).send("No se ha enviado el token de autenticación");
+    }
+    const decoded = jwt.verify(token, KEY);
 
-      if (existUsername && existPassword && existEmail) {
-        next();
-      } else {
-        return res.send({ mensaje: "Error no tienes autorización" });
-      }
+    const getUsuario = await getDocs(
+      query(Usuarios, where("email", "==", decoded?.email))
+    );
+    const datosUsuario = getUsuario.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    let existUsername =
+      datosUsuario[0]?.username === decoded?.username ? true : false;
+    let existPassword =
+      datosUsuario[0]?.password === decoded?.password ? true : false;
+    let existEmail = datosUsuario[0]?.email === decoded?.email ? true : false;
+
+    if (existUsername && existPassword && existEmail) {
+      next();
     } else {
-      res.status(400).send(validar.msg);
+      return res.send({
+        mensaje: "Error no tienes autorización o token invalido",
+      });
     }
   } catch (error) {
     return res.send({ mensaje: error.message });

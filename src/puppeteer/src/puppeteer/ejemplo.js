@@ -1,5 +1,5 @@
 import puppeteer from "puppeteer";
-
+i
 export let Navegar = async (pageUrl, searchWord) => {
   try {
     const browser2 = await puppeteer.launch({ headless: false });
@@ -10,15 +10,14 @@ export let Navegar = async (pageUrl, searchWord) => {
     await page2.waitForSelector("div #search h3");
     let dato = await page2.evaluate(() => {
       let datos = [];
-      for (let index = 0; index < 5; index++) {
+      for (let index = 0; index < 15; index++) {
         let objetoBusqueda = {
-          titulo: document.getElementsByClassName("LC20lb MBeuO DKV0Md")[index]
-            .innerText,
+          titulo: document.getElementsByClassName("LC20lb MBeuO DKV0Md")[index]?.innerText || '',
           contenido:
             document.getElementsByClassName(
               "VwiC3b yXK7lf MUxGbd yDYNvb lyLwlc lEBKkf"
-            )[index].innerText ||
-            document.getElementsByClassName("Wt5Tfe")[index].innerText,
+            )[index]?.innerText ||
+            document.getElementsByClassName("Wt5Tfe")[index]?.innerText || '',
         };
 
 
@@ -35,4 +34,5 @@ export let Navegar = async (pageUrl, searchWord) => {
   }
 };
 
-Navegar("https://www.google.com/", "js docs node");
+Navegar("https://www.google.com/", "javascript");
+

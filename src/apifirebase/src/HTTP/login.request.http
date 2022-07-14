@@ -1,0 +1,11 @@
+@api = http://localhost:3002/v1/login
+
+### login de un usuario
+POST  {{api}}
+content-type: application/json
+
+{
+    "username": "antoni",
+    "email": "antonio@mail.com",
+    "password":"anton45MAR@%&"
+}

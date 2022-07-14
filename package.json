@@ -18,6 +18,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "5.0.1",
     "cors": "2.8.5",
     "dotenv": "16.0.1",
     "ejs": "^3.1.8",
@@ -27,9 +28,10 @@
     "fs": "^0.0.1-security",
     "jdoc": "0.2.0",
     "json2csv": "5.0.7",
+    "jsonwebtoken": "8.5.1",
     "multer": "1.4.5-lts.1",
     "puppeteer": "14.4.1",
     "socket.io": "4.5.1",
-    "validaresquema": "^0.1.0"
+    "validaresquema": "0.1.2"
   }
 }

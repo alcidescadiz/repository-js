@@ -7,7 +7,6 @@ import {
   getALLUsersMayorEdad,
   getOneUsers,
   createUser,
-  loginUser,
   updateUser,
   sendImage,
   deleteImage
@@ -26,9 +25,7 @@ routerUser.get("/api/:id", validarUsuario, getOneUsers);
 
 routerUser.post("/api",validateRequestUser, createUser);
 
-routerUser.post("/api/login", loginUser);
-
-routerUser.post("/api/image", upload.single('file'), sendImage);
+routerUser.post("/api/image", validarUsuario, upload.single('file'), sendImage);
 
 routerUser.put("/api/:id", validarUsuario,validateRequestUser, updateUser);
 

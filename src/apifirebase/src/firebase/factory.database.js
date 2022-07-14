@@ -1,3 +1,7 @@
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
+const KEY = process.env.KEY
 import {
   collection as Collection,
   getDocs,
@@ -78,56 +82,54 @@ export async function deleteDocumentDatabase(id, nameCollection) {
 }
 
 export async function createDocDatabase(nameCollection, ObjEntity) {
-    try {
-        let dato = await addDoc(Collection(db, nameCollection), ObjEntity);
-        res.send({ ...ObjEntity, msg: "Usuario agregado con éxito" });
-    } catch (error) {
-      return {
-        error: error.message,
-        msg: "Algo mal ha pasado revise los datos enviados",
-      }
-    }
+  try {
+    let dato = await addDoc(Collection(db, nameCollection), ObjEntity);
+    res.send({ ...ObjEntity, msg: "Usuario agregado con éxito" });
+  } catch (error) {
+    return {
+      error: error.message,
+      msg: "Algo mal ha pasado revise los datos enviados",
+    };
+  }
 }
 export async function isEmailUnique(email, nameCollection) {
   try {
     const emailUnique = (
-      await getDocs(query(Collection(db, nameCollection), where("email", "==", email)))
+      await getDocs(
+        query(Collection(db, nameCollection), where("email", "==", email))
+      )
     ).docs;
-     return emailUnique.length
-
+    return emailUnique.length;
   } catch (error) {
-    return 1
+    return 1;
   }
 }
 
-export async function updateDocDatabase(id,nameCollection, ObjEntity ) {
+export async function updateDocDatabase(id, nameCollection, ObjEntity) {
   try {
-      await updateDoc(
-        doc(db, nameCollection, id),
-        {...ObjEntity}
-      );
-      return{ message: `Documento: ${id} editado` }
+    await updateDoc(doc(db, nameCollection, id), { ...ObjEntity });
+    return { message: `Documento: ${id} editado` };
   } catch (error) {
     return {
       error: error.message,
       msg: "Algo mal ha pasado revise los datos enviados",
-    }
+    };
   }
 }
 
-export async function updateOnePropietyDocDatabase(id,nameCollection, PropietyObj ) {
+export async function updateOnePropietyDocDatabase(
+  id,
+  nameCollection,
+  PropietyObj
+) {
   try {
-      await updateDoc(
-        doc(db, nameCollection, id),
-        PropietyObj
-      );
-      return{ message: `Documento: ${id} editado` }
- 
+    await updateDoc(doc(db, nameCollection, id), PropietyObj);
+    return { message: `Documento: ${id} editado` };
   } catch (error) {
     return {
       error: error.message,
       msg: "Algo mal ha pasado revise los datos enviados",
-    }
+    };
   }
 }
 
@@ -145,14 +147,19 @@ export async function doLogin(nameCollection, username, password, email) {
     let existEmail = datosUsuario[0]?.email === email ? true : false;
 
     if (existUsername && existPassword && existEmail) {
-      return datosUsuario
+      const token = jwt.sign(
+        { username, password, email },
+        KEY,
+        { expiresIn: "2h" }
+      );
+      return token;
     } else {
-      return{ msg: "Datos no registrados" }
+      return { msg: "Datos no registrados" };
     }
   } catch (error) {
-    return{
+    return {
       error: error.message,
       msg: "Algo mal ha pasado revise los datos enviados",
-    }
+    };
   }
 }

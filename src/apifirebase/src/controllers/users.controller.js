@@ -1,4 +1,4 @@
-import { isImageValdate } from "../utils/validaciones.js";
+import { isImageValidate } from "validaresquema";
 import {
   createDocDatabase,
   deleteDocumentDatabase,
@@ -31,18 +31,11 @@ export async function getOneUsers(req, res) {
 export async function sendImage(req, res) {
   try {
     const { buffer, size, originalname } = req.file;
-    const { id, email, username, password } = req.body;
-    let datosUsuario = await getOneDatabase(id, nameCollection);
-
-    let existUsername = datosUsuario.username === username ? true : false;
-    let existPassword = datosUsuario.password === password ? true : false;
-    let existEmail = datosUsuario.email === email ? true : false;
-
-    if (existUsername && existPassword && existEmail) {
-      if (!isImageValdate({ size, originalname }).validation) {
+    const { id } = req.body;
+      if (!isImageValidate(originalname, size).validation) {
         res
           .status(404)
-          .send({ msg: isImageValdate({ size, originalname }).msg });
+          .send({ msg: isImageValidate( size, originalname ).msg });
         return;
       }
       // Subir una imagen a Storage:
@@ -52,9 +45,6 @@ export async function sendImage(req, res) {
         linkImage: datos.linkImage,
       });
       res.status(200).send({ linkImage: datos.linkImage });
-    } else {
-      return res.status(404).send({ mensaje: "Error no tienes autorización" });
-    }
   } catch (error) {
     res.status(404).send({
       error: error.message,
