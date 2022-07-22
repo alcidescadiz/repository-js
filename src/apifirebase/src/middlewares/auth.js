@@ -13,7 +13,9 @@ const KEY = process.env.KEY;
 let nameCollection = "usuarios";
 let Usuarios = Collection(db, nameCollection);
 
+
 const validarUsuario = async (req, res, next) => {
+
   try {
     const token = req.headers["x-access-token"];
     if (!token) {

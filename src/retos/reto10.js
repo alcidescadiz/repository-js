@@ -18,35 +18,58 @@ getCoins(16) // [1, 0, 1, 1, 0, 0] -> una moneda de 1 céntimo, una de 5 y una d
 getCoins(100) // [0, 0, 0, 0, 0, 2] -> dos monedas de 50 céntimos
 La dificultad del reto está en saber utilizar correctamente una estructura que te permita conocer las monedas que tienes disponible para crear el array con la devolución, ya que debes usar siempre el menor número de monedas posible. ¡Suerte 👩‍💻👨‍💻!.
  */
-let coins=[]
-coins[0] = 1 //céntimo
-coins[1] = 2 //céntimos
-coins[2] = 5 //céntimos
-coins[3] = 10 //céntimos
-coins[4] = 20 //céntimos
-coins[5] = 50 //céntimos
+let coins = [];
+coins[0] = 1; //céntimo
+coins[1] = 2; //céntimos
+coins[2] = 5; //céntimos
+coins[3] = 10; //céntimos
+coins[4] = 20; //céntimos
+coins[5] = 50; //céntimos
 
-
-function getCoins(change) {
-    // ¡No olvides compartir tu solución en redes!
-    let result = []
-    result= coins.map((e,i)=>{
-        e = change/e >= 1 ? Math.floor(change/e) : 0
-        //e=  (change % e)=== 0 ? e : 0
-        return e       
-    })
-    for (let i = 0; i < result.length; i++) {
-       //result[5-i]= (change%(result[5-i]*coins[5-i])) ===1 ? 1 : result[5-i]
-        
-    }
-
-
-    console.log(result)
-    return result
+function getCoins(change, capturar = []) {
+  let result = [];
+  function objeto(moneda) {
+    let cantidad = Math.floor(change / moneda);
+    let resta = change - cantidad * moneda;
+    return {
+      moneda: moneda,
+      cantidad: cantidad,
+      resta: cantidad === 0 ? 0 : resta,
+    };
   }
+  coins.forEach((e, i) => result.push(objeto(coins[i])));
+  capturar.push(
+    result.sort((a, b) => {
+      if (a.cantidad > 0) return a.cantidad - b.cantidad;
+    })[0]
+  );
+  let vuelto = [];
+  for (let index = 0; index < coins.length; index++) {
+    for (let j = 0; j < capturar.length; j++) {
+      if (coins[index] === capturar[j].moneda) {
+        vuelto[index] = capturar[j].cantidad || 0;
+      }
+    }
+  }
+  coins.forEach((e, i) => (vuelto[i] = vuelto[i] ? vuelto[i] : 0));
+  if (
+    result.sort((a, b) => {
+      if (a.cantidad > 0) return a.cantidad - b.cantidad;
+    })[0].resta === 0
+  ) {
+    return console.log(vuelto);
+  }
+  getCoins(
+    result.sort((a, b) => {
+      if (a.cantidad > 0) return a.cantidad - b.cantidad;
+    })[0].resta,
+    capturar
+  );
+  return vuelto;
+}
 
-getCoins(51) // [1, 0, 0, 0, 0, 1] -> una moneda de 1 céntimo y otra de 50 céntimos
-getCoins(3) // [1, 1, 0, 0, 0, 0] -> una moneda de 1 céntimo y otra de 2
-getCoins(5) // [0, 0, 1, 0, 0, 0] -> una moneda de 5 céntimos
-getCoins(16) // [1, 0, 1, 1, 0, 0] -> una moneda de 1 céntimo, una de 5 y una de 10
-getCoins(100) // [0, 0, 0, 0, 0, 2] -> dos monedas de 50 céntimos
+getCoins(51); // [1, 0, 0, 0, 0, 1] -> una moneda de 1 céntimo y otra de 50 céntimos
+getCoins(3); // [1, 1, 0, 0, 0, 0] -> una moneda de 1 céntimo y otra de 2
+getCoins(5); // [0, 0, 1, 0, 0, 0] -> una moneda de 5 céntimos
+getCoins(16); // [1, 0, 1, 1, 0, 0] -> una moneda de 1 céntimo, una de 5 y una de 10
+getCoins(100); // [0, 0, 0, 0, 0, 2] -> dos monedas de 50 céntimos

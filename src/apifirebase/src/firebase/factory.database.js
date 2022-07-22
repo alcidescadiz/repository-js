@@ -150,7 +150,7 @@ export async function doLogin(nameCollection, username, password, email) {
       const token = jwt.sign(
         { username, password, email },
         KEY,
-        { expiresIn: "2h" }
+        { expiresIn: '48h' }
       );
       return token;
     } else {

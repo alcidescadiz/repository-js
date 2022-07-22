@@ -116,6 +116,14 @@ export async function updateUser(req, res) {
 }
 
 export async function deleteUser(req, res) {
-  const { id } = req.params;
-  res.status(204).send(await deleteDocumentDatabase(id, nameCollection));
+  try {
+    const { id } = req.params;
+    let result =await deleteDocumentDatabase(id, nameCollection)
+    res.status(200).send({result});
+  } catch (error) {
+    res.status(400).send({
+      error: error.message,
+      msg: "Algo mal ha pasado al eliminar un documento",
+    });
+  }
 }

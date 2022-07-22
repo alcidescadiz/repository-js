@@ -1,3 +1,5 @@
+const { ValidarEsquema } = require("validaresquema")
+
 /**
  * Ejemplod de Objetos en Javascript
  * @module Objetos
@@ -83,3 +85,6 @@ let data = [
   let  hash = {};
   let array = data.filter(o => hash[o.nombre] ? false : hash[o.nombre] = true);
   console.log(array); 
+
+import {ValidarEsquema, isImageValidate} from '../../node_modules/validaresquema/index.js'
+console.log(ValidarEsquema([{ name: {value: 'luis', type:'string'}}]))
