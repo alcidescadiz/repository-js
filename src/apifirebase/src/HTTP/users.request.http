@@ -1,5 +1,5 @@
 @api = http://localhost:3002/v1/user
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFudG9uaSIsInBhc3N3b3JkIjoiYW50b240NU1BUkAlJiIsImVtYWlsIjoiYW50b25pb0BtYWlsLmNvbSIsImlhdCI6MTY1NzgwMTg0MCwiZXhwIjoxNjU3ODA5MDQwfQ.POZd0jCgfEeNgJbF7uwRDlm-glpy15qMHEZ8drEGlHY
+@token = 
 
 
 ### todos los usuarios
@@ -64,5 +64,16 @@ content-type: application/json
     "passwordNew": "Jose1%&hgsjo5"
 }
 ### eliminar un usuario
+<<<<<<< HEAD
 DELETE  {{api}}/api/CePaaXje6JohvkU2xzUY
 x-access-token : {{token}}
+=======
+DELETE  {{api}}/api/BoNjwsCYWBh2Qb9aAbp0
+content-type: application/json
+
+{
+    "password": "Amaria@12345",
+    "email": "maria@mail.com",
+    "username": "mari21"
+}
+>>>>>>> 9e979ecf777084d332715e3f6d7e3c07d6fada24
