@@ -23,7 +23,7 @@ let Router = () => {
         return;
       } else {
         Routes.map((e, i) => {
-          if (((e.path === null ||e.path === pathname ) && (e.protected === false || isLogin.status === null))){
+          if (((e.path === null ||e.path === pathname ) && e.protected === false)){
             template += e.template(e.props);
           }else{
             if ( e.path === pathname && e.protected === isLogin.status && e.protected === true) {
@@ -37,12 +37,12 @@ let Router = () => {
     template = ``;
   };
   let RenderEvent = () => {
-    document.addEventListener("click", (e) => {
-      if (e.target.href) {
-        Render();
-        console.log("render");
+    window.addEventListener("hashchange", (e) => {
+      //if (e.target.href) {
         console.log(Login());
-      }
+        console.log("render");
+        Render();
+      //}
     });
   };
   let PageNotFound = (addNotFound) => NotFount = addNotFound;
@@ -61,7 +61,6 @@ function Menu(fn='') {
   let menu = `
     <a href="#" >Home </a> |
     <a href="#login" >Login </a> |
-    <p onclick="alert('hola')">hola</p>
     <hr>
     `;
     let menuTrue = `

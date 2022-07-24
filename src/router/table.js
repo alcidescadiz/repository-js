@@ -92,6 +92,7 @@ function RenderTable() {
   }, 10)
 }
 
+
 document.addEventListener("submit", (e) => {
   e.preventDefault();
   eventForm("formulario");
@@ -105,11 +106,13 @@ document.addEventListener("click", (e) => {
   if (e.target.innerHTML === "Delete") {
     let id = Number(e.target.parentNode.parentNode.childNodes[0].innerHTML);
     setArrayObjects({ mode: "delete", id });
+    RenderTable();
   }
   if (e.target.innerHTML === "Edit") {
     let id = Number(e.target.parentNode.parentNode.childNodes[0].innerHTML);
+    RenderTable();
   }
-  RenderTable();
+  
 });
 
 function Table(){
