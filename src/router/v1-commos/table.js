@@ -84,22 +84,20 @@ let [getData, eventForm] = useForm();
 
 function RenderTable() {
   setTempleteArray(getArrayObjects());
-  setTimeout(()=>{
+  setTimeout(() => {
     try {
-        document.getElementById("tabla").innerHTML = getTempleteArray();
-    } catch (error) {
-    }
-  }, 10)
+      document.getElementById("tabla").innerHTML = getTempleteArray();
+    } catch (error) {}
+  }, 10);
 }
-
 
 document.addEventListener("submit", (e) => {
   e.preventDefault();
   eventForm("formulario");
   setArrayObjects({ value: getData(), mode: "add" });
-  setTimeout(()=>{
-      RenderTable();
-  },10)
+  setTimeout(() => {
+    RenderTable();
+  }, 10);
 });
 
 document.addEventListener("click", (e) => {
@@ -112,11 +110,10 @@ document.addEventListener("click", (e) => {
     let id = Number(e.target.parentNode.parentNode.childNodes[0].innerHTML);
     RenderTable();
   }
-  
 });
 
-function Table(){
-    let formInpts= `
+function Table() {
+  let formInpts = `
     <form id="formulario">
       <input type="text" name="name" id="name" />
       <input type="text" name="lastname" id="lastname" />
@@ -124,6 +121,6 @@ function Table(){
     </form>
     <button onclick= "RenderTable()">Show Table</button>
     <div id="tabla"></div>
-    `
-    return formInpts
-  }
+    `;
+  return formInpts;
+}

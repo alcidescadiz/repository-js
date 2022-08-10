@@ -23,5 +23,5 @@ const fields = ["car.make", "car.model", "price", "color"];
 
 const json2csvParser = new Parser({ fields });
 const csv = json2csvParser.parse(myCars);
-fs.writeFileSync('./src/jsontocsv/archivo.csv', csv, 'utf-8')
+fs.writeFileSync('./src/2csv/archivo.csv', csv, 'utf-8')
 

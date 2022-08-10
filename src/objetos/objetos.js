@@ -18,6 +18,13 @@ let objeto= {
         alumno: true
     }
 }
+let { uno:{nombre: name, alumno:studnets} , dos , tres } = objeto 
+console.log(name)
+//let objeto = {}
+objeto.nuevo = 0
+console.log(objeto.hasOwnProperty('nuevo')) // true
+delete objeto.nuevo
+console.log(objeto.hasOwnProperty('nuevo')) // false
 /**
  * Iterar un objeto
  */
@@ -88,3 +95,18 @@ let data = [
 
 import {ValidarEsquema, isImageValidate} from '../../node_modules/validaresquema/index.js'
 console.log(ValidarEsquema([{ name: {value: 'luis', type:'string'}}]))
+
+/**
+ * destructurar
+ */
+let jsonFile = [{
+    id:1,
+    selector: 'esto es un selector',
+    data1: {
+        query: 'esto es una query',
+        array2: [{uno: 1},2,3]
+    }
+}]
+
+let { data1:{query:dos2, array2: [{uno:one}]}} = jsonFile[0]
+console.log({ dos2, one})

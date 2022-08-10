@@ -24,7 +24,7 @@ export let Navegar = async (pageUrl) => {
       });
       resultado.push(dato);
     }
-    console.log(resultado);
+    console.table(resultado);
     await browser.close();
   } catch (error) {
     console.log({ mesg: error.message });

@@ -3,7 +3,7 @@ import { evaluateFor } from "./modulo/evaluatefor.js";
 import { scrollPage } from "./modulo/scroll.js";
 
 async function Alcides() {
-  const { browser, page } = await BrowserHiden(false);
+  const { browser, page } = await BrowserHiden();
 
   await page.goto(`https://hive.blog/@alcidescadiz`, {
     waitUntil: "networkidle0",
@@ -38,38 +38,4 @@ async function Alcides() {
 
 Alcides();
 
-function recursivo (numeros = [], acc= 0){
-  let n = numeros.length
-  let sum = acc + numeros[n-1]
-  console.log(sum)
-  if (n === 1) return
-  numeros.length  = numeros.length -1
-  recursivo(numeros, sum)
-}
 
-recursivo([1,2,3,4])
-
-const propieties = [
-  {
-    id: 1,
-    name: "title",
-    type: "innerText",
-    selector: "div h2 a",
-  },
-  {
-    id:3,
-    name: "link",
-    type: "href",
-    selector: "div h2 a",
-  },
-  {
-    id:2,
-    name: "date",
-    type: "title",
-    selector: ".updated",
-  },
-];
-
-console.log(propieties.sort((a,b) => a.id - b.id))
-
-console.log([].length)

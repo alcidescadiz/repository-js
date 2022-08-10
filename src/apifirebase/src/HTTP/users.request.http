@@ -23,7 +23,7 @@ content-type: application/json
     "nombre": "antonio montechiaro",
     "edad": 18,
     "email": "antonio@mail.com",
-    "password":"anton45MAR@%&"
+    "password":""
 }
 
 ### subir imagen
@@ -61,19 +61,8 @@ content-type: application/json
     "edadNew": 26,
     "linkImage": "",
     "nombreNew": "JOSE ALEJANDRO MARCANO lopez",
-    "passwordNew": "Jose1%&hgsjo5"
+    "passwordNew": ""
 }
 ### eliminar un usuario
-<<<<<<< HEAD
 DELETE  {{api}}/api/CePaaXje6JohvkU2xzUY
 x-access-token : {{token}}
-=======
-DELETE  {{api}}/api/BoNjwsCYWBh2Qb9aAbp0
-content-type: application/json
-
-{
-    "password": "Amaria@12345",
-    "email": "maria@mail.com",
-    "username": "mari21"
-}
->>>>>>> 9e979ecf777084d332715e3f6d7e3c07d6fada24
